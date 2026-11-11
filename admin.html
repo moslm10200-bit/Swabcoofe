@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <title>لوحة الأدمن</title>
+  <link rel="stylesheet" href="admin.css?v=1">
+</head>
+<body>
+
+  <!-- تسجيل الدخول -->
+  <main class="login" id="loginView">
+    <form class="login-card" id="loginForm" autocomplete="on">
+      <a class="back" href="index.html">← العودة للمتجر</a>
+      <h1>دخول الأدمن</h1>
+      <label>البريد الإلكتروني
+        <input type="email" id="email" name="email" autocomplete="username" required dir="ltr">
+      </label>
+      <label>كلمة السر
+        <input type="password" id="password" name="password" autocomplete="current-password" required dir="ltr">
+      </label>
+      <div class="err" id="loginErr" role="alert"></div>
+      <button class="btn primary" id="loginBtn" type="submit">دخول</button>
+    </form>
+  </main>
+
+  <!-- لوحة التحكم -->
+  <div class="app" id="appView" hidden>
+    <header class="bar">
+      <div class="who"><b>لوحة الأدمن</b><span id="whoEmail" dir="ltr"></span></div>
+      <div class="bar-end">
+        <a class="btn ghost" href="index.html">المتجر</a>
+        <button class="btn ghost" id="logoutBtn">خروج</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab on" data-tab="products" role="tab">المنتجات</button>
+      <button class="tab" data-tab="orders" role="tab">الطلبات <i class="badge" id="newBadge" hidden>0</i></button>
+    </nav>
+
+    <div class="notice" id="notice" hidden></div>
+
+    <!-- المنتجات -->
+    <section id="tab-products">
+      <div class="toolbar">
+        <button class="btn primary" id="addBtn">+ منتج جديد</button>
+        <button class="btn ghost" id="importBtn" hidden>استيراد منتجات الموقع الحالية</button>
+      </div>
+      <div class="plist" id="plist"></div>
+    </section>
+
+    <!-- الطلبات -->
+    <section id="tab-orders" hidden>
+      <div class="olist" id="olist"></div>
+    </section>
+  </div>
+
+  <!-- نافذة تعديل المنتج -->
+  <div class="overlay" id="overlay" hidden></div>
+  <form class="modal" id="pForm" hidden>
+    <h2 id="pTitle">منتج جديد</h2>
+    <label>الاسم <input id="pName" required maxlength="80"></label>
+    <div class="row">
+      <label>السعر <input id="pPrice" type="number" min="0" step="any" inputmode="decimal" required dir="ltr"></label>
+      <label>التصنيف <input id="pCat" list="catList" maxlength="40"></label>
+    </div>
+    <datalist id="catList"></datalist>
+    <div class="row">
+      <label>لون الكوب <input id="pColor" type="color" value="#f472b6"></label>
+      <label>ترتيب العرض <input id="pOrder" type="number" step="1" inputmode="numeric" dir="ltr"></label>
+    </div>
+    <label>رابط الصورة (اختياري) <input id="pImage" type="url" placeholder="https://..." dir="ltr"></label>
+    <label class="file">أو ارفع صورة <input id="pFile" type="file" accept="image/*"></label>
+    <div class="preview" id="pPreview"></div>
+    <div class="err" id="pErr" role="alert"></div>
+    <div class="modal-foot">
+      <button class="btn primary" type="submit" id="pSave">حفظ</button>
+      <button class="btn ghost" type="button" id="pCancel">إلغاء</button>
+    </div>
+  </form>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="firebase-config.js?v=14"></script>
+  <script src="products.js?v=14"></script>
+  <script src="firebase-adapter.js?v=14"></script>
+  <script src="admin.js?v=1"></script>
+</body>
+</html>
